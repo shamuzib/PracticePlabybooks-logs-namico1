@@ -1,0 +1,14 @@
+--- #PAUSE Module
+- hosts: all
+  remote_user: test
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+  - name: remove lynx
+    package: name=lynx state=removed
+  - name: Pausing
+    pause:
+     seconds: 5
+  - name: Verify lynx status
+    package: name=lynx state=present

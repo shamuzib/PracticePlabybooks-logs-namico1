@@ -1,0 +1,10 @@
+--- #Start tomcat services
+- hosts: all
+  remote_user: test
+  gather_facts: yes
+  connection: ssh
+  become: yes
+  tasks:
+  - name: starting tomcat service
+    raw: systemctl start tomcat
+    when: ansible_os_family == 'RedHat'

@@ -1,0 +1,9 @@
+--- #Copy module
+- hosts: all
+  remote_user: test
+  connection: ssh
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: copying files to remote location
+    copy: src=/home/test/Pract/copy.yml dest=/home/test/ mode=777 group=test owner=test backup=yes

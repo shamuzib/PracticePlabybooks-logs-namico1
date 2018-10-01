@@ -1,0 +1,9 @@
+--- #CRON Module
+- hosts: all
+  connection: ssh
+  remote_user: test
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Scheduling a job
+    cron: name="namicojob" minute="35" hour="3,5" job="ls -al /home/test/ > /home/test/cronjob.log"

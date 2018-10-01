@@ -1,0 +1,22 @@
+--- #WAITFOR Module
+- hosts: all
+  remote_user: test
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+  - name: Install tomcat to install
+    package: name=tomcat state=latest
+    when: ansible_os_family == 'RedHat'
+  - name: Waiting for 8080 to be started
+    wait_for:
+     port: 8080
+     state: started
+     timeout: 1 
+    ignore_errors: yes
+
+  - name: enable tomcat services
+    service: name=tomcat state=started
+    when: ansible_os_family == 'RedHat'
+  - name: Verify lynx Installation
+    package: name=lynx state=present
